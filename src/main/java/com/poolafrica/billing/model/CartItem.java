@@ -14,12 +14,18 @@ public class CartItem {
     private String cartId;
     @Column(name = "product_id")
     private int productId;
+    @Column(name = "product_name")
+    private String productName;
     @Column(name = "extra_id")
     private int extraId;
-    @Column(name = "quantity")
-    private int quantity;
-    @Column(name = "price")
-    private double price;
+    @Column(name = "extra_name")
+    private String extraName;
+    @Column(name = "extra_price")
+    private double extraPrice;
+    @Column(name = "product_quantity")
+    private int productQuantity;
+    @Column(name = "product_price")
+    private double productPrice;
     @Column(name = "total_price")
     private double totalPrice;
 
@@ -50,6 +56,14 @@ public class CartItem {
         this.productId = productId;
     }
 
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
     public int getExtraId() {
         return extraId;
     }
@@ -58,20 +72,36 @@ public class CartItem {
         this.extraId = extraId;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public String getExtraName() {
+        return extraName;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setExtraName(String extraName) {
+        this.extraName = extraName;
     }
 
-    public double getPrice() {
-        return price;
+    public double getExtraPrice() {
+        return extraPrice;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setExtraPrice(double extraPrice) {
+        this.extraPrice = extraPrice;
+    }
+
+    public int getProductQuantity() {
+        return productQuantity;
+    }
+
+    public void setProductQuantity(int productQuantity) {
+        this.productQuantity = productQuantity;
+    }
+
+    public double getProductPrice() {
+        return productPrice;
+    }
+
+    public void setProductPrice(double productPrice) {
+        this.productPrice = productPrice;
     }
 
     public double getTotalPrice() {

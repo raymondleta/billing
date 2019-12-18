@@ -15,10 +15,9 @@ public class CartController {
 
 
 
-    @PostMapping(value = "/postCart")
-    public String postCart(@RequestBody Cart cart){
-//        cartRepository.save(cart);
-        return "Success"+cart.getUserId();
+    @PostMapping(value = "/post-cart")
+    public void postCart(@RequestBody Cart cart){
+        cartRepository.save(cart);
     }
 
 }

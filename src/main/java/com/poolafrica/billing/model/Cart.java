@@ -1,9 +1,8 @@
 package com.poolafrica.billing.model;
 
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.List;
+
 
 @Entity
 @Table(name = "cart")
@@ -13,22 +12,22 @@ public class Cart {
     @Column(name = "id", unique = true, nullable = false)
     private String id;
     @Column(name = "user_id")
-    private int userId;
+    private Integer userId;
 
 
     public Cart() {
     }
 
-    public Cart(String id, int userId) {
+    public Cart(String id, Integer userId) {
         this.id = id;
         this.userId = userId;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

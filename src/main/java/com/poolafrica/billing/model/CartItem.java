@@ -8,35 +8,26 @@ public class CartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, nullable = false, columnDefinition = "integer")
-    private Integer id;
-    @Column(name = "product_id")
-    private Integer productId;
+    @Column(name = "id", unique = true, nullable = false)
+    private int id;
     @Column(name = "cart_id")
     private String cartId;
+    @Column(name = "product_id")
+    private int productId;
     @Column(name = "extra_id")
-    private Integer extraId;
+    private int extraId;
     @Column(name = "quantity")
-    private Integer quantity;
+    private int quantity;
 
     public CartItem() {
-
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
-    }
-
-    public Integer getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Integer productId) {
-        this.productId = productId;
     }
 
     public String getCartId() {
@@ -47,19 +38,27 @@ public class CartItem {
         this.cartId = cartId;
     }
 
-    public Integer getExtraId() {
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+
+    public int getExtraId() {
         return extraId;
     }
 
-    public void setExtraId(Integer extraId) {
+    public void setExtraId(int extraId) {
         this.extraId = extraId;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 }

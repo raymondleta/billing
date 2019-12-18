@@ -18,6 +18,10 @@ public class CartItem {
     private int extraId;
     @Column(name = "quantity")
     private int quantity;
+    @Column(name = "price")
+    private double price;
+    @Column(name = "total_price")
+    private double totalPrice;
 
     public CartItem() {
     }
@@ -60,5 +64,21 @@ public class CartItem {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

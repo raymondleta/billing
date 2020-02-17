@@ -1,7 +1,7 @@
-package com.poolafrica.billing.controller;
+package com.poolafrica.billing.cart.controller;
 
-import com.poolafrica.billing.model.CartItem;
-import com.poolafrica.billing.repository.CartItemRepository;
+import com.poolafrica.billing.cart.model.CartItem;
+import com.poolafrica.billing.cart.repository.CartItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,8 +14,6 @@ public class CartItemController {
 
     @Autowired
     CartItemRepository cartItemRepository;
-
-
 
     @PostMapping(value = "/post-item")
     public String postCartItem(@RequestBody CartItem cartItem){

@@ -1,16 +1,13 @@
-package com.poolafrica.billing.controller;
+package com.poolafrica.billing.mpesa;
 
-import com.poolafrica.billing.Constants;
-import com.poolafrica.billing.Mpesa;
 import org.springframework.web.bind.annotation.*;
-
 import java.io.IOException;
 
 @RequestMapping("/api/v1/billing")
 @RestController
 public class MpesaController {
 
-    Mpesa m=new Mpesa(Constants.APP_KEY, Constants.APP_SECRET);
+    Mpesa m=new Mpesa(Constants.INSTANCE.getAPP_KEY(), Constants.INSTANCE.getAPP_SECRET());
 
     @PostMapping(value = "/mpesa-auth")
     public String mpesaAuthenticate(){
@@ -22,6 +19,7 @@ public class MpesaController {
             return "error";
         }
     }
+
 
     @PostMapping(value = "/stk-push")
     public String mpesaStkPush(){

@@ -1,4 +1,4 @@
-package com.poolafrica.billing;
+package com.poolafrica.billing.mpesa;
 
 import okhttp3.*;
 import org.json.JSONArray;

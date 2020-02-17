@@ -35,5 +35,13 @@ public class MpesaController {
         }
     }
 
+    @PostMapping(value = "/stk-callback")
+    public void mpesaStkCalback(){
+        try {
+            m.STKPushTransactionStatus("174379","MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjAwMjE3MTQzMDAw","20200217143000",m.getCheckoutId());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

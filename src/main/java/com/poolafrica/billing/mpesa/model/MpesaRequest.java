@@ -1,4 +1,4 @@
-package com.poolafrica.billing.mpesa;
+package com.poolafrica.billing.mpesa.model;
 
 public class MpesaRequest {
    private String businessShortCode;

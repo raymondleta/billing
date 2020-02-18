@@ -1,5 +1,7 @@
-package com.poolafrica.billing.mpesa;
+package com.poolafrica.billing.mpesa.controller;
 
+import com.poolafrica.billing.mpesa.utils.Constants;
+import com.poolafrica.billing.mpesa.utils.Mpesa;
 import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 
@@ -7,12 +9,12 @@ import java.io.IOException;
 @RestController
 public class MpesaController {
 
-    Mpesa m=new Mpesa(Constants.INSTANCE.getAPP_KEY(), Constants.INSTANCE.getAPP_SECRET());
-    
+    private Mpesa mpesa =new Mpesa(Constants.INSTANCE.getAPP_KEY(), Constants.INSTANCE.getAPP_SECRET());
+
     @PostMapping(value = "/stk-push")
     public String mpesaStkPush(){
         try {
-             m.STKPushSimulation("174379", "MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjAwMjE4MTA0MDAw",
+             mpesa.STKPushSimulation("174379", "MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjAwMjE4MTA0MDAw",
                     "20200218104000","CustomerPayBillOnline", "1",  "254714581282", "174379","254714581282",
                     "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest", "test", "test");
             return "Success";
@@ -26,9 +28,9 @@ public class MpesaController {
     @PostMapping(value = "/stk-callback")
     public String mpesaStkCalback(){
         try {
-            m.STKPushTransactionStatus("174379","MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjAwMjE4MTA0MDAw","20200218104000",m.mpesaResponse());
+            mpesa.STKPushTransactionStatus("174379","MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjAwMjE4MTA0MDAw","20200218104000", mpesa.mpesaResponse());
 
-            if (m.processMpesaResponseCode().equals("0")){
+            if (mpesa.processMpesaResponseCode().equals("0")){
                 return "Success";
             }else{
                 return "Fail";

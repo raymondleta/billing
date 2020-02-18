@@ -1,4 +1,4 @@
-package com.poolafrica.billing.mpesa;
+package com.poolafrica.billing.mpesa.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,6 +1,8 @@
-package com.poolafrica.billing.mpesa;
+package com.poolafrica.billing.mpesa.utils;
 
 import com.google.gson.Gson;
+import com.poolafrica.billing.mpesa.model.MpesaQuerySuccess;
+import com.poolafrica.billing.mpesa.model.MpesaResponseSuccess;
 import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -58,7 +60,7 @@ public class Mpesa {
         return jsonObject.getString("access_token");
     }
 
-    String STKPushSimulation(String businessShortCode, String password, String timestamp, String transactionType,
+    public String STKPushSimulation(String businessShortCode, String password, String timestamp, String transactionType,
                              String amount, String partyA, String partyB, String phoneNumber, String callBackURL,
                              String accountReference, String transactionDesc) throws IOException {
         JSONArray jsonArray = new JSONArray();
@@ -99,7 +101,7 @@ public class Mpesa {
         return response.body().toString();
     }
 
-    String STKPushTransactionStatus(String businessShortCode, String password, String timestamp, String checkoutRequestID) throws IOException {
+    public String STKPushTransactionStatus(String businessShortCode, String password, String timestamp, String checkoutRequestID) throws IOException {
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("BusinessShortCode", businessShortCode);
@@ -128,7 +130,7 @@ public class Mpesa {
         return response.body().toString();
     }
 
-    String mpesaResponse() {
+    public String mpesaResponse() {
 
         String json = null;
         try {
@@ -141,7 +143,7 @@ public class Mpesa {
         return checkoutId.getCheckoutRequestID();
     }
 
-     String processMpesaResponseCode(){
+     public String processMpesaResponseCode(){
         String json = null;
 
 

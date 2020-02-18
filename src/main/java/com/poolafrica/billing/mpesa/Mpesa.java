@@ -12,16 +12,12 @@ public class Mpesa {
     private String appKey;
     private String appSecret;
     private Response resp;
-    private String checkoutId;
+    private Response status;
 
 
     public Mpesa(String app_key, String app_secret) {
         appKey = app_key;
         appSecret = app_secret;
-    }
-
-    public String getCheckoutId() {
-        return checkoutId;
     }
 
     public String getAppKey() {
@@ -40,7 +36,7 @@ public class Mpesa {
         this.appSecret = appSecret;
     }
 
-    public String authenticate() throws IOException {
+    private String authenticate() throws IOException {
 
         String appKeySecret = appKey + ":" + appSecret;
         byte[] bytes = appKeySecret.getBytes("ISO-8859-1");
@@ -62,9 +58,9 @@ public class Mpesa {
         return jsonObject.getString("access_token");
     }
 
-    public String STKPushSimulation(String businessShortCode, String password, String timestamp, String transactionType,
-                                    String amount, String partyA, String partyB, String phoneNumber, String callBackURL,
-                                    String accountReference, String transactionDesc) throws IOException {
+    String STKPushSimulation(String businessShortCode, String password, String timestamp, String transactionType,
+                             String amount, String partyA, String partyB, String phoneNumber, String callBackURL,
+                             String accountReference, String transactionDesc) throws IOException {
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("BusinessShortCode", businessShortCode);
@@ -103,7 +99,7 @@ public class Mpesa {
         return response.body().toString();
     }
 
-    public String STKPushTransactionStatus(String businessShortCode, String password, String timestamp, String checkoutRequestID) throws IOException {
+    String STKPushTransactionStatus(String businessShortCode, String password, String timestamp, String checkoutRequestID) throws IOException {
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("BusinessShortCode", businessShortCode);
@@ -128,11 +124,11 @@ public class Mpesa {
                 .build();
 
         Response response = client.newCall(request).execute();
-        System.out.println(response.body().string());
+        status = response;
         return response.body().toString();
     }
 
-    private void mpesaResponse() {
+    String mpesaResponse() {
 
         String json = null;
         try {
@@ -142,10 +138,22 @@ public class Mpesa {
         }
         Gson g = new Gson();
         MpesaResponseSuccess checkoutId = g.fromJson(json, MpesaResponseSuccess.class);
-        this.checkoutId = checkoutId.getCheckoutRequestID();
+        return checkoutId.getCheckoutRequestID();
     }
 
-    private void processMpesaResponseCode(){
+     String processMpesaResponseCode(){
+        String json = null;
+
+
+        try {
+            json = status.body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Gson g = new Gson();
+        MpesaQuerySuccess statusCode = g.fromJson(json, MpesaQuerySuccess.class);
+        return statusCode.getResultCode();
 
     }
 }

@@ -1,10 +1,8 @@
 package com.poolafrica.billing.mpesa.controller;
 
 import com.mpesa_api.wrappers.responses.callbacks.STK_Success_CallbackResponse;
-import com.poolafrica.billing.mpesa.model.MpesaBody;
 import com.poolafrica.billing.mpesa.utils.Constants;
 import com.poolafrica.billing.mpesa.utils.Mpesa;
-import okhttp3.Response;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;

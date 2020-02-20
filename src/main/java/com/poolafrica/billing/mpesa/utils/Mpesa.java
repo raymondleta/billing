@@ -3,7 +3,6 @@ package com.poolafrica.billing.mpesa.utils;
 import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.Base64;
 

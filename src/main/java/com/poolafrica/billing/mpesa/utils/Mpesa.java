@@ -1,8 +1,5 @@
 package com.poolafrica.billing.mpesa.utils;
 
-import com.google.gson.Gson;
-import com.poolafrica.billing.mpesa.model.MpesaQuerySuccess;
-import com.poolafrica.billing.mpesa.model.MpesaResponseSuccess;
 import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -61,8 +58,8 @@ public class Mpesa {
     }
 
     public String STKPushSimulation(String businessShortCode, String password, String timestamp, String transactionType,
-                             String amount, String partyA, String partyB, String phoneNumber, String callBackURL,
-                             String accountReference, String transactionDesc) throws IOException {
+                                    String amount, String partyA, String partyB, String phoneNumber, String callBackURL,
+                                    String accountReference, String transactionDesc) throws IOException {
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("BusinessShortCode", businessShortCode);
@@ -101,61 +98,4 @@ public class Mpesa {
         return response.body().toString();
     }
 
-    public String STKPushTransactionStatus(String businessShortCode, String password, String timestamp, String checkoutRequestID) throws IOException {
-        JSONArray jsonArray = new JSONArray();
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("BusinessShortCode", businessShortCode);
-        jsonObject.put("Password", password);
-        jsonObject.put("Timestamp", timestamp);
-        jsonObject.put("CheckoutRequestID", checkoutRequestID);
-
-        jsonArray.put(jsonObject);
-
-        String requestJson = jsonArray.toString().replaceAll("[\\[\\]]", "");
-
-
-        OkHttpClient client = new OkHttpClient();
-
-        MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(mediaType, requestJson);
-        Request request = new Request.Builder()
-                .url("https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query")
-                .post(body)
-                .addHeader("authorization", "Bearer " + authenticate())
-                .addHeader("content-type", "application/json")
-                .build();
-
-        Response response = client.newCall(request).execute();
-        status = response;
-        return response.body().toString();
-    }
-
-    public String mpesaResponse() {
-
-        String json = null;
-        try {
-            json = resp.body().string();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Gson g = new Gson();
-        MpesaResponseSuccess checkoutId = g.fromJson(json, MpesaResponseSuccess.class);
-        return checkoutId.getCheckoutRequestID();
-    }
-
-     public String processMpesaResponseCode(){
-        String json = null;
-
-
-        try {
-            json = status.body().string();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Gson g = new Gson();
-        MpesaQuerySuccess statusCode = g.fromJson(json, MpesaQuerySuccess.class);
-        return statusCode.getResultCode();
-
-    }
 }

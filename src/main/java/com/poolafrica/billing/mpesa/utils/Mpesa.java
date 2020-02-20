@@ -9,29 +9,10 @@ import java.util.Base64;
 public class Mpesa {
     private String appKey;
     private String appSecret;
-    private Response resp;
-    private Response status;
-
 
     public Mpesa(String app_key, String app_secret) {
         appKey = app_key;
         appSecret = app_secret;
-    }
-
-    public String getAppKey() {
-        return appKey;
-    }
-
-    public void setAppKey(String appKey) {
-        this.appKey = appKey;
-    }
-
-    public String getAppSecret() {
-        return appSecret;
-    }
-
-    public void setAppSecret(String appSecret) {
-        this.appSecret = appSecret;
     }
 
     private String authenticate() throws IOException {
@@ -93,7 +74,6 @@ public class Mpesa {
 
         Response response = client.newCall(request).execute();
 
-        resp = response;
         return response.body().toString();
     }
 

@@ -1,6 +1,7 @@
 package com.poolafrica.billing.mpesa.controller;
 
 import com.mpesa_api.wrappers.responses.callbacks.STK_Success_CallbackResponse;
+import com.poolafrica.billing.mpesa.model.MpesaRequestBody;
 import com.poolafrica.billing.mpesa.utils.Constants;
 import com.poolafrica.billing.mpesa.utils.Mpesa;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +19,11 @@ public class MpesaController {
     private String userResponse;
 
     @PostMapping(value = "/stk-push")
-    private String mpesaStkPush() {
-       phone = "254714581282";
+    private String mpesaStkPush(@RequestBody MpesaRequestBody body) {
         try {
-            mpesa.STKPushSimulation("174379", "MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjAwMjIwMTYyNTAw",
-                    "20200220162500", "CustomerPayBillOnline", "1", phone, "174379", phone,
-                    "https://2034edf2.ngrok.io/api/v1/billing/stk-callback", "test", "test");
+            mpesa.STKPushSimulation("174379", "MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjAwMjIxMTAzNDAw",
+                    "20200221103400", "CustomerPayBillOnline", body.getAmount(), body.getPhone(), "174379", body.getPhone(),
+                    "http://6a71920e.ngrok.io/api/v1/billing/stk-callback", "Nginyo", "Nginyo");
             return "Success";
 
         } catch (IOException e) {

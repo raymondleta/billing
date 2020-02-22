@@ -9,6 +9,7 @@ import javax.persistence.*;
 public class Cart {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private String id;
     @Column(name = "user_id")
